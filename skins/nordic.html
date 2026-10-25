@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><title>TipBeam – nordic</title><style>
+html,body{margin:0;height:100%;background:transparent;overflow:hidden}
+#box{position:absolute;left:50%;top:15%;transform:translateX(-50%);opacity:0;text-align:center;max-width:80vw}
+#box.show{animation:pop 6s ease forwards}
+.who,.verb,.amt{display:inline}.msg{display:block;margin-top:.4em}
+@keyframes pop{0%{opacity:0;transform:translateX(-50%) translateY(30px)}10%,85%{opacity:1;transform:translateX(-50%)}100%{opacity:0;transform:translateX(-50%) translateY(-20px)}}
+#box{font:600 38px "Segoe UI",Ubuntu,sans-serif;color:#eaf6ff;padding:22px 34px;border-radius:4px;background:linear-gradient(135deg,rgba(0,47,108,.9),rgba(64,140,200,.85));border-top:6px solid #fff;letter-spacing:.5px}.amt{color:#bfe6ff}.msg{font-size:24px;color:#dff}
+</style></head><body><div id="box"><span class="who"></span> <span class="verb"></span> <span class="amt"></span><span class="msg"></span></div>
+<script>
+const L={en:"tipped",fi:"tippasi",sv:"tipsade"};
+const S=[{name:"Aino",amount:"0.25",message:"Hyvä peli!",lang:"fi"},{name:"Erik",amount:"0.1",message:"Snyggt spelat!",lang:"sv"},{name:"Sam",amount:"0.5",message:"GG, keep going!",lang:"en"}];
+const p=new URLSearchParams(location.search);
+function show(t){const b=document.getElementById("box");const l=L[t.lang]||L.en;
+b.querySelector(".who").textContent=t.name||"Someone";b.querySelector(".verb").textContent=l;
+b.querySelector(".amt").textContent=(t.amount||"0")+" SOL";b.querySelector(".msg").textContent=t.message||"";
+b.classList.remove("show");void b.offsetWidth;b.classList.add("show");}
+if(p.has("name")||p.has("amount")){show({name:p.get("name"),amount:p.get("amount"),message:p.get("message"),lang:p.get("lang")});}
+else{let i=0;const go=()=>show(S[i++%S.length]);go();setInterval(go,8000);}
+</script>
+</body></html>

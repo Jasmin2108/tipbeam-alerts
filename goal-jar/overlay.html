@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>TipBeam Goal Jar</title><style>
+html,body{margin:0;background:transparent;font-family:system-ui,sans-serif}
+.w{position:absolute;left:5%;right:5%;bottom:6%;background:rgba(10,12,20,.8);color:#fff;padding:16px 22px;border-radius:14px}
+.t{display:flex;justify-content:space-between;font-weight:700;font-size:26px}.lab{color:#9cf;font-size:16px;text-transform:uppercase;letter-spacing:1px}
+.bar{height:22px;background:#2a2f3a;border-radius:11px;margin:10px 0 6px;overflow:hidden}.f{height:100%;width:0;background:linear-gradient(90deg,#14f195,#9945ff);transition:width 1.2s ease}
+.n{display:flex;justify-content:space-between;font-size:18px;color:#ccd}</style></head><body>
+<div class="w"><div class="lab" id="lab"></div><div class="t"><span id="ti"></span><span id="pc"></span></div><div class="bar"><div class="f" id="f"></div></div><div class="n"><span id="cu"></span><span id="ta"></span></div></div>
+<script>
+const p=new URLSearchParams(location.search),G={en:"Goal",fi:"Tavoite",sv:"Mål"};
+const demo=!p.has("current")&&!p.has("target");
+const title=p.get("title")||"Next game",cur=parseFloat(p.get("current")??(demo?1.2:0))||0,tar=parseFloat(p.get("target")??5)||5;
+const pct=Math.min(100,cur/tar*100);
+lab.textContent=G[p.get("lang")]||G.en;ti.textContent=title;pc.textContent=pct.toFixed(0)+"%";
+cu.textContent=cur+" SOL";ta.textContent=tar+" SOL";setTimeout(()=>f.style.width=pct+"%",100);
+</script></body></html>
